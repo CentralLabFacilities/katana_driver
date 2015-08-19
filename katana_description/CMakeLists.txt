@@ -17,6 +17,23 @@ catkin_package(
   DEPENDS
 )
 
+if(TARGET ivcon)
+  message(STATUS "target ivcon is present")
+else(TARGET ivcon)
+  message(STATUS "target ivcon is NOT present")
+  add_executable(ivcon IMPORTED)
+  set_property(TARGET ivcon PROPERTY IMPORTED_LOCATION "${ivcon_PREFIX}/bin/ivcon")
+endif(TARGET ivcon)
+
+if(TARGET convex_decomposition)
+  message(STATUS "target convex_decomposition is present")
+else(TARGET convex_decomposition)
+  message(STATUS "target convex_decomposition is NOT present")
+  add_executable(convex_decomposition IMPORTED)
+  set_property(TARGET convex_decomposition PROPERTY IMPORTED_LOCATION "${convex_decomposition_PREFIX}/bin/convex_decomposition")
+endif(TARGET ivcon)
+
+
 # iterate through all the stl files to:
 #  1. convert to *.iv files
 #  2. generate convex decomposed .stl
