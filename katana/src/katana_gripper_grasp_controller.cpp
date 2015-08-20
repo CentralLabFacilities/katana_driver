@@ -60,6 +60,7 @@ KatanaGripperGraspController::KatanaGripperGraspController(boost::shared_ptr<Abs
 KatanaGripperGraspController::~KatanaGripperGraspController()
 {
   delete action_server_;
+  delete action_sensor_server_;
 }
 
 void KatanaGripperGraspController::executeCB(const control_msgs::GripperCommandGoalConstPtr &goal)
