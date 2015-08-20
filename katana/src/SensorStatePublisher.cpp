@@ -21,7 +21,7 @@ void SensorStatePublisher::update()
   std::vector<std::string> sensor_names = katana->getGripperSensorNames();
   std::vector<short> readings = katana->getGripperSensorReadings();
 
-  for (size_t i = 0; i < NUM_GRIPPER_SENSORS; i++)
+  for (size_t i = 0; i < NUM_GRIPPER_SENSORS && i < readings.size(); i++)
   {
     msg->name.push_back(sensor_names[i].c_str());
     msg->position.push_back((float)readings[i]);
