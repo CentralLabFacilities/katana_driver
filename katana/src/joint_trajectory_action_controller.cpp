@@ -34,11 +34,38 @@ namespace katana
 {
 
 JointTrajectoryActionController::JointTrajectoryActionController(boost::shared_ptr<AbstractKatana> katana) :
-  katana_(katana), action_server_(ros::NodeHandle(), "katana_arm_controller/joint_trajectory_action",
+  action_server_(ros::NodeHandle(), "katana_arm_controller/joint_trajectory_action",
                                   boost::bind(&JointTrajectoryActionController::executeCB, this, _1), false),
   action_server_follow_(ros::NodeHandle(), "katana_arm_controller/follow_joint_trajectory",
 			boost::bind(&JointTrajectoryActionController::executeCBFollow, this, _1), false)
 {
+  if (katana) {
+    setKatana(katana);
+  }
+
+  ros::NodeHandle node_;
+
+  // Subscriptions, publishers, services
+  action_server_.start();
+  action_server_follow_.start();
+  sub_command_ = node_.subscribe("katana_arm_controller/command", 1, &JointTrajectoryActionController::commandCB, this);
+  serve_query_state_ = node_.advertiseService("katana_arm_controller/query_state", &JointTrajectoryActionController::queryStateService, this);
+  controller_state_publisher_ = node_.advertise<control_msgs::JointTrajectoryControllerState> ("katana_arm_controller/state", 1);
+}
+
+JointTrajectoryActionController::~JointTrajectoryActionController()
+{
+  sub_command_.shutdown();
+  serve_query_state_.shutdown();
+}
+
+void JointTrajectoryActionController::setKatana(boost::shared_ptr<AbstractKatana> katana)
+{
+  katana_ = katana;
+
+  if (!katana_)
+    return;
+
   ros::NodeHandle node_;
 
   joints_ = katana_->getJointNames();
@@ -56,22 +83,9 @@ JointTrajectoryActionController::JointTrajectoryActionController(boost::shared_p
     //    node_.param(ns + "/trajectory", trajectory_constraints_[i], -1.0);
   }
 
-  // Subscriptions, publishers, services
-  action_server_.start();
-  action_server_follow_.start();
-  sub_command_ = node_.subscribe("katana_arm_controller/command", 1, &JointTrajectoryActionController::commandCB, this);
-  serve_query_state_ = node_.advertiseService("katana_arm_controller/query_state", &JointTrajectoryActionController::queryStateService, this);
-  controller_state_publisher_ = node_.advertise<control_msgs::JointTrajectoryControllerState> ("katana_arm_controller/state", 1);
-
   // NOTE: current_trajectory_ is not initialized here, because that will happen in reset_trajectory_and_stop()
 
   reset_trajectory_and_stop();
-}
-
-JointTrajectoryActionController::~JointTrajectoryActionController()
-{
-  sub_command_.shutdown();
-  serve_query_state_.shutdown();
 }
 
 /**

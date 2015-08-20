@@ -63,6 +63,11 @@ KatanaGripperGraspController::~KatanaGripperGraspController()
   delete action_sensor_server_;
 }
 
+void KatanaGripperGraspController::setKatana(boost::shared_ptr<AbstractKatana> katana)
+{
+  katana_ = katana;
+}
+
 void KatanaGripperGraspController::executeCB(const control_msgs::GripperCommandGoalConstPtr &goal)
 {
   ROS_INFO("Moving gripper to position: %f", goal->command.position);

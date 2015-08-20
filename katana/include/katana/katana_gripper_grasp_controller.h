@@ -43,8 +43,10 @@ namespace katana
 class KatanaGripperGraspController
 {
 public:
-  KatanaGripperGraspController(boost::shared_ptr<AbstractKatana> katana);
+  KatanaGripperGraspController(boost::shared_ptr<AbstractKatana> katana = boost::shared_ptr<AbstractKatana>());
   virtual ~KatanaGripperGraspController();
+
+  void setKatana(boost::shared_ptr<AbstractKatana> katana);
 
 private:
   //! Action server for the grasp posture action

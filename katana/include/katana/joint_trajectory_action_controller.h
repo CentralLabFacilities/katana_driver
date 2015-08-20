@@ -57,11 +57,12 @@ typedef actionlib::SimpleActionClient<control_msgs::JointTrajectoryAction> JTAC;
 typedef actionlib::SimpleActionServer<control_msgs::FollowJointTrajectoryAction> FJTAS;
 
 public:
-  JointTrajectoryActionController(boost::shared_ptr<AbstractKatana> katana);
+  JointTrajectoryActionController(boost::shared_ptr<AbstractKatana> katana = boost::shared_ptr<AbstractKatana>());
   virtual ~JointTrajectoryActionController();
 
   void reset_trajectory_and_stop();
   void update();
+  void setKatana(boost::shared_ptr<AbstractKatana> katana);
 
 private:
   // additional control_msgs::FollowJointTrajectoryResult

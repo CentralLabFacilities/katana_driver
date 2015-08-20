@@ -47,8 +47,10 @@ class JointMovementActionController
   typedef actionlib::SimpleActionClient<katana_msgs::JointMovementAction> JMAC;
 
 public:
-  JointMovementActionController(boost::shared_ptr<AbstractKatana> katana);
+  JointMovementActionController(boost::shared_ptr<AbstractKatana> katana = boost::shared_ptr<AbstractKatana>());
   virtual ~JointMovementActionController();
+
+  void setKatana(boost::shared_ptr<AbstractKatana> katana);
 
 private:
   // robot and joint state
