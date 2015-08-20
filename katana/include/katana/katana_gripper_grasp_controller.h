@@ -49,6 +49,7 @@ public:
 private:
   //! Action server for the grasp posture action
   actionlib::SimpleActionServer<control_msgs::GripperCommandAction> *action_server_;
+  actionlib::SimpleActionServer<control_msgs::GripperCommandAction> *action_sensor_server_;
 
   //! Server for the posture query service
   ros::ServiceServer query_srv_;
@@ -57,12 +58,16 @@ private:
 
   //! A difference in desired goal angle and actual goal angle above this value indicates that the goal was not reached
   double goal_threshold_;
+  int force_threshold_;
 
   void executeCB(const control_msgs::GripperCommandGoalConstPtr &goal);
+  void executeCBwithSensor(const control_msgs::GripperCommandGoalConstPtr &goal);
 
   bool serviceCallback(control_msgs::QueryTrajectoryState::Request &request,
                        control_msgs::QueryTrajectoryState::Response &response);
 
+  bool isForceLimitReached();
+  bool isGoalReached(const control_msgs::GripperCommandGoalConstPtr &goal);
 };
 
 }
