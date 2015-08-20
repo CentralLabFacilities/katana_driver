@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="ip" default="192.168.1.1" />
+
   <param name="katana_type" type="string" value="$(env KATANA_TYPE)" />
+  <param name="katana/ip"   type="string" value="$(arg ip)" />
 
   <!-- start katana node for a physical katana arm -->
   <include file="$(find katana)/launch/$(env KATANA_TYPE).launch" />
