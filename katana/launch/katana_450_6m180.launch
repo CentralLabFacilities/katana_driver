@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="ip" default="192.168.1.1" />
+  <arg name="simulation" default="false" />
+
+  <!-- load katana urdf -->
+  <include file="$(find katana_description)/launch/upload_katana_450_6m180.launch" />
+
+  <!-- robot state publisher -->
+  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" />
+
+  <!-- which joints does this katana instance control? -->
+  <rosparam command="load" file="$(find katana)/config/katana_arm_controllers.yaml" />
+  
+  <!-- katana node -->
+  <node pkg="katana" type="katana" name="katana" output="screen">
+   <param name="config_file_path" type="string" value="$(find kni)/KNI_4.3.0/configfiles450/katana6M180_G.cfg" />
+  
+   <<param name="simulation" type="bool" value="$(arg simulation)" />
+   <param name="ip" type="string" value="$(arg ip)" />
+  </node>
+
+</launch>
+
+ 
