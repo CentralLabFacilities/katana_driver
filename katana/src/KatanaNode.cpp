@@ -50,12 +50,12 @@ KatanaNode::KatanaNode()
     if (katana_type == "katana_300_6m180")
       katana.reset(new Katana300());
     else if (katana_type == "katana_400_6m180" || katana_type == "katana_450_6m90a"
-        || katana_type == "katana_450_6m90b")
+        || katana_type == "katana_450_6m90b" || katana_type == "katana_450_6m180")
       katana.reset(new Katana());
     else
     {
       ROS_ERROR(
-          "Parameter katana_type was set to invalid value: %s; please use one of the following: katana_300_6m180, katana_400_6m180, katana_450_6m90a, katana_450_6m90b", katana_type.c_str());
+          "Parameter katana_type was set to invalid value: %s; please use one of the following: katana_300_6m180, katana_400_6m180, katana_450_6m90a, katana_450_6m90b, katana_450_6m180", katana_type.c_str());
       exit(-1);
     }
   }
