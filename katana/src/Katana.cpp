@@ -555,13 +555,16 @@ bool Katana::moveJoint(int motorIndex, double desiredAngle)
 
 bool Katana::someMotorCrashed()
 {
+  bool crashed = false;
   for (size_t i = 0; i < NUM_MOTORS; i++)
   {
-    if (motor_status_[i] == MSF_MOTCRASHED)
-      return true;
+    if (motor_status_[i] == MSF_MOTCRASHED) {
+      crashed = true;
+      ROS_DEBUG("Motor %d crashed!", (int)i);
+    }
   }
 
-  return false;
+  return crashed;
 }
 
 bool Katana::allJointsReady()
