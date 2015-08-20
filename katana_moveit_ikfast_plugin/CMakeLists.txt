@@ -25,7 +25,7 @@ set(IKFAST_LIBRARY_NAME katana_moveit_ikfast_kinematics_plugin)
 
 find_package(LAPACK REQUIRED)
 
-add_library(${IKFAST_LIBRARY_NAME} src/katana_450_6m90a_ikfast_plugin.cpp)
+add_library(${IKFAST_LIBRARY_NAME} src/katana_450_6m90a_ikfast_plugin.cpp src/katana_450_6m180_ikfast_plugin.cpp)
 target_link_libraries(${IKFAST_LIBRARY_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LAPACK_LIBRARIES})
 
 install(TARGETS ${IKFAST_LIBRARY_NAME} LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})

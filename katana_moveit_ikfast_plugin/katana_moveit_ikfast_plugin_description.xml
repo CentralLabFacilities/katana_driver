@@ -3,4 +3,7 @@
  <class name="katana_450_6m90a_kinematics/IKFastKinematicsPlugin" type="katana_450_6m90a_kinematics::IKFastKinematicsPlugin" base_class_type="kinematics::KinematicsBase">
     <description>IKFast61 plugin for closed-form kinematics</description>
   </class>
+ <class name="katana_450_6m180_kinematics/IKFastKinematicsPlugin" type="katana_450_6m180_kinematics::IKFastKinematicsPlugin" base_class_type="kinematics::KinematicsBase">
+    <description>IKFast61 plugin for closed-form kinematics</description>
+  </class>
 </library>
