@@ -73,6 +73,12 @@ void SimulatedKatana::refreshEncoders()
   }
 }
 
+
+void SimulatedKatana::refreshSensors()
+{
+  // TODO
+}
+
 bool SimulatedKatana::executeTrajectory(boost::shared_ptr<SpecifiedTrajectory> traj_ptr, boost::function<bool ()> isPreemptRequested)
 {
   // ------- wait until start time

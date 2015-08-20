@@ -7,3 +7,20 @@ katana_joints:
 katana_gripper_joints:
   - katana_r_finger_joint
   - katana_l_finger_joint
+katana_gripper_sensors:
+  - katana_r_inside_near_distance_sensor
+  - katana_r_inside_far_distance_sensor
+  - ""
+  - ""
+  - katana_r_outside_distance_sensor
+  - katana_r_tip_distance_sensor
+  - katana_r_inside_near_force_sensor
+  - katana_r_inside_far_force_sensor
+  - katana_l_inside_near_distance_sensor
+  - katana_l_inside_far_distance_sensor
+  - ""
+  - katana_wrist_middle_distance_sensor
+  - katana_l_outside_distance_sensor
+  - katana_l_tip_distance_sensor
+  - katana_l_inside_near_force_sensor
+  - katana_l_inside_far_force_sensor

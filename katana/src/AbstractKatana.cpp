@@ -38,6 +38,9 @@ AbstractKatana::AbstractKatana()
   gripper_joint_names_.resize(NUM_GRIPPER_JOINTS);
   gripper_joint_types_.resize(NUM_GRIPPER_JOINTS);
 
+  // names for 16 gripper sensors
+  sensor_names_.resize(NUM_GRIPPER_SENSORS);
+
   // angles and velocities and limits: the 5 "real" joints + gripper
   motor_angles_.resize(NUM_MOTORS);
   motor_velocities_.resize(NUM_MOTORS);
@@ -126,6 +129,35 @@ AbstractKatana::AbstractKatana()
 
     // ROS_INFO("Setting MotorLimit for %s to min: %f - max: %f", motor_limits_[NUM_JOINTS + i].joint_name.c_str(), motor_limits_[NUM_JOINTS + i].min_position, motor_limits_[NUM_JOINTS + i].max_position);
   }
+
+
+  XmlRpc::XmlRpcValue sensor_names;
+
+  // Gets all of the sensors
+  if (!n.getParam("katana_gripper_sensors", sensor_names))
+  {
+    ROS_ERROR("No sensors given. (namespace: %s)", n.getNamespace().c_str());
+  }
+  if (sensor_names.getType() != XmlRpc::XmlRpcValue::TypeArray)
+  {
+    ROS_ERROR("Malformed sensor specification.  (namespace: %s)", n.getNamespace().c_str());
+  }
+  if (sensor_names.size() != (size_t)NUM_GRIPPER_SENSORS)
+  {
+    ROS_ERROR("Wrong number of sensors! was: %d, expected: %zu", sensor_names.size(), NUM_GRIPPER_SENSORS);
+  }
+  for (size_t i = 0; i < NUM_GRIPPER_SENSORS; ++i)
+  {
+    XmlRpc::XmlRpcValue &name_value = sensor_names[i];
+    if (name_value.getType() != XmlRpc::XmlRpcValue::TypeString)
+    {
+      ROS_ERROR("Array of sensor names should contain all strings.  (namespace: %s)",
+          n.getNamespace().c_str());
+    }
+    ROS_DEBUG("Add sensor name: '%s')", std::string(name_value).c_str());
+    sensor_names_[i] = std::string(name_value);
+
+  }
 }
 
 AbstractKatana::~AbstractKatana()
@@ -133,6 +165,11 @@ AbstractKatana::~AbstractKatana()
 }
 
 void AbstractKatana::freezeRobot()
+{
+  // do nothing (can be overridden)
+}
+
+void AbstractKatana::freezeMotor(int motorIndex)
 {
   // do nothing (can be overridden)
 }
@@ -167,6 +204,23 @@ std::vector<std::string> AbstractKatana::getJointNames()
   return joint_names_;
 }
 
+int AbstractKatana::getGripperSensorIndex(std::string sensor_name)
+{
+  for (int i = 0; i < (int)joint_names_.size(); i++)
+  {
+    if (sensor_names_[i] == sensor_name)
+      return i;
+  }
+
+  ROS_ERROR("Sensor not found: %s.", sensor_name.c_str());
+  return -1;
+}
+
+std::vector<std::string> AbstractKatana::getGripperSensorNames()
+{
+  return sensor_names_;
+}
+
 std::vector<int> AbstractKatana::getJointTypes()
 {
   return joint_types_;
@@ -190,6 +244,11 @@ std::vector<double> AbstractKatana::getMotorAngles()
 std::vector<double> AbstractKatana::getMotorVelocities()
 {
   return motor_velocities_;
+}
+
+std::vector<short> AbstractKatana::getGripperSensorReadings()
+{
+  return gripper_sensor_readings_;
 }
 
 std::vector<moveit_msgs::JointLimits> AbstractKatana::getMotorLimits()

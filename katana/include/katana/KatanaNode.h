@@ -28,6 +28,7 @@
 #include <ros/ros.h>
 
 #include <katana/JointStatePublisher.h>
+#include <katana/SensorStatePublisher.h>
 #include <katana/joint_trajectory_action_controller.h>
 #include <katana/joint_movement_action_controller.h>
 #include <katana/katana_gripper_grasp_controller.h>

@@ -106,6 +106,10 @@ Katana::Katana() :
     /* ********* init robot ********* */
     kni.reset(new CLMBase());
     kni->create(config_file_path.c_str(), protocol);
+
+    if (kni->GetBase()->GetSCT()->cnt <= 0)
+      ROS_DEBUG("Robot has no gripper sensors!");
+
     ROS_INFO("success: katana initialized");
   }
   catch (Exception &e)
@@ -121,6 +125,7 @@ Katana::Katana() :
   ROS_INFO("success: katana calibrated");
 
   refreshEncoders();
+  refreshSensors();
 
   // boost::thread worker_thread(&Katana::test_speed, this);
 
@@ -195,6 +200,56 @@ void Katana::refreshEncoders()
     //  motor_velocities_[4] *= -1.0;
 
     last_encoder_update_ = ros::Time::now();
+  }
+  catch (const WrongCRCException &e)
+  {
+    ROS_ERROR("WrongCRCException: Two threads tried to access the KNI at once. This means that the locking in the Katana node is broken. (exception in refreshEncoders(): %s)", e.message().c_str());
+  }
+  catch (const ReadNotCompleteException &e)
+  {
+    ROS_ERROR("ReadNotCompleteException: Another program accessed the KNI. Please stop it and restart the Katana node. (exception in refreshEncoders(): %s)", e.message().c_str());
+  }
+  catch (const ParameterReadingException &e)
+  {
+    ROS_ERROR("ParameterReadingException: Could not receive PVP (Position Velocity PWM) parameters from a motor (exception in refreshEncoders(): %s)", e.message().c_str());
+  }
+  catch (const FirmwareException &e)
+  {
+    // This can happen when the arm collides with something (red LED).
+    // The message returned by the Katana in this case is:
+    // FirmwareException : 'move buffer error (axis 1)'
+    ROS_ERROR("FirmwareException: Did the arm collide with something (red LED)? (exception in refreshEncoders(): %s)", e.message().c_str());
+  }
+  catch (const Exception &e)
+  {
+    ROS_ERROR("Unhandled exception in refreshEncoders(): %s", e.message().c_str());
+  }
+  catch (...)
+  {
+    ROS_ERROR("Unhandled exception in refreshEncoders()");
+  }
+}
+
+void Katana::refreshSensors()
+{
+  try
+  {
+    boost::recursive_mutex::scoped_lock lock(kni_mutex);
+
+    if (kni->GetBase()->GetSCT()->cnt <= 0)
+    {
+      ROS_DEBUG("Robot has no gripper sensors");
+      return;
+    }
+
+    CSctBase sensor_ctrl = kni->GetBase()->GetSCT()->arr[0];
+
+    sensor_ctrl.recvDAT();
+    const TSctDAT* data = sensor_ctrl.GetDAT();
+
+    gripper_sensor_readings_.resize(NUM_GRIPPER_SENSORS);
+    gripper_sensor_readings_.assign(data->arr, data->arr + NUM_GRIPPER_SENSORS);
+
   }
   catch (const WrongCRCException &e)
   {
@@ -456,6 +511,13 @@ void Katana::freezeRobot()
   boost::recursive_mutex::scoped_lock lock(kni_mutex);
   kni->flushMoveBuffers();
   kni->freezeRobot();
+}
+
+void Katana::freezeMotor(int motorIndex)
+{
+  boost::recursive_mutex::scoped_lock lock(kni_mutex);
+  kni->flushMoveBuffers();
+  kni->freezeMotor(motorIndex);
 }
 
 bool Katana::moveJoint(int motorIndex, double desiredAngle)

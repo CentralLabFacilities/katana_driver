@@ -36,6 +36,9 @@ const size_t NUM_JOINTS = NUM_MOTORS - 1;
 /// The number of gripper_joints in the katana (= the two gripper finger joints)
 const size_t NUM_GRIPPER_JOINTS = 2;
 
+/// The number of gripper_sensors in the katana sensor gripper
+const size_t NUM_GRIPPER_SENSORS = 16;
+
 /// The motor index of the gripper (used in all vectors -- e.g., motor_angles_)
 const size_t GRIPPER_INDEX = NUM_MOTORS - 1;
 

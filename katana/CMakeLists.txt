@@ -50,6 +50,7 @@ add_executable(katana src/KatanaNode.cpp
                       src/Katana300.cpp
                       src/SimulatedKatana.cpp
                       src/JointStatePublisher.cpp
+                      src/SensorStatePublisher.cpp
                       src/joint_trajectory_action_controller.cpp
                       src/joint_movement_action_controller.cpp
                       src/KNIConverter.cpp

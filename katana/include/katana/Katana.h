@@ -52,11 +52,13 @@ public:
   virtual ~Katana();
 
   void refreshEncoders();
+  void refreshSensors();
 
   virtual bool executeTrajectory(boost::shared_ptr<SpecifiedTrajectory> traj,
                                  boost::function<bool()> isPreemptRequested);
 
   virtual void freezeRobot();
+  virtual void freezeMotor(int motorIndex);
   virtual bool moveJoint(int jointIndex, double turningAngle);
 
   virtual void refreshMotorStatus();

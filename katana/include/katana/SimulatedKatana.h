@@ -38,6 +38,7 @@ public:
   virtual ~SimulatedKatana();
 
   virtual void refreshEncoders();
+  virtual void refreshSensors();
   virtual bool executeTrajectory(boost::shared_ptr<SpecifiedTrajectory> traj,
                                  boost::function<bool()> isPreemptRequested);
   virtual void moveGripper(double openingAngle);
