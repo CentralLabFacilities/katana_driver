@@ -152,8 +152,10 @@ void Katana::setLimits(void) {
 		// These two settings probably only influence KNI functions like moveRobotToEnc(),
 		// openGripper() and so on, and not the spline trajectories. We still set them
 		// just to be sure.
-		kni->setMotorAccelerationLimit(i, KNI_MAX_ACCELERATION);
-		kni->setMotorVelocityLimit(i, KNI_MAX_VELOCITY);
+	        // lz: actually they are also defined in the KNI config, which is a better place for
+	        // configuring motor limits than here, imho
+		//kni->setMotorAccelerationLimit(i, KNI_MAX_ACCELERATION);
+		//kni->setMotorVelocityLimit(i, KNI_MAX_VELOCITY);
 	}
 }
 
