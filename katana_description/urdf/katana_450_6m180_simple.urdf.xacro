@@ -139,7 +139,7 @@
 	  <origin xyz="${link2_length} 0 0" rpy="0 0 0"/>
 	  <axis xyz="0 0 1"/>
 	  <!-- unexplicably, the measured velocity limit of this motor is exactly half of what vel_enc2rad(180) says -->
-	  <limit effort="0.25" lower="-2.221804" upper="2.054223"  velocity="1.190799"/>  
+	  <limit effort="0.25" lower="-2.220084" upper="2.054223"  velocity="1.190799"/>  
 	</joint>
 	
 	<link name="katana_motor3_lift_link">
