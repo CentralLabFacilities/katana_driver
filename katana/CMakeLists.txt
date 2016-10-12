@@ -19,6 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 find_package(Boost REQUIRED COMPONENTS system thread)
+find_package(Armadillo REQUIRED)
+include_directories(${ARMADILLO_INCLUDE_DIRS})
 
 catkin_package(
   INCLUDE_DIRS include
@@ -56,7 +58,7 @@ add_executable(katana src/KatanaNode.cpp
                       src/KNIConverter.cpp
                       src/spline_functions.cpp
                       src/katana_gripper_grasp_controller.cpp)
-target_link_libraries(katana ${catkin_LIBRARIES})
+target_link_libraries(katana ${catkin_LIBRARIES} ${ARMADILLO_LIBRARIES})
 add_dependencies(katana ${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 
 add_executable(katana_arm_kinematics src/KNIConverter.cpp
@@ -78,3 +80,4 @@ install(DIRECTORY config
 
 catkin_install_python(PROGRAMS nodes/fake_katana_joint_publisher.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
