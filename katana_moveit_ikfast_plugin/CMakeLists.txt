@@ -22,6 +22,7 @@ catkin_package(
 include_directories(include)
 
 set(IKFAST_LIBRARY_NAME katana_moveit_ikfast_kinematics_plugin)
+set (CMAKE_CXX_STANDARD 11)
 
 find_package(LAPACK REQUIRED)
 
