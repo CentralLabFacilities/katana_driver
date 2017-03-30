@@ -2,6 +2,23 @@
 Changelog for package katana
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.7 (2017-02-11)
+------------------
+* KNIKinematics: Remove GetKinematicSolverInfo service
+  The service definition was removed from moveit_msgs on Kinetic in commit 2f3f97b9.
+* Contributors: Martin Guenther
+
+1.0.6 (2017-01-27)
+------------------
+* Initial release to Kinetic
+* Contributors: Martin Günther
+
+1.0.5 (2016-04-12)
+------------------
+
+1.0.4 (2016-04-11)
+------------------
+
 1.0.3 (2015-06-29)
 ------------------
 
