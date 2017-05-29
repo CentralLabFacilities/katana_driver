@@ -56,7 +56,7 @@
       <child link="katana_motor1_pan_link" />
       <origin xyz="0 0 ${base_height}" rpy="0 0 0"/>
       <axis xyz="0 0 1"/>
-      <limit effort="1.5" lower="-3.025528" upper="2.891097" velocity="2.208932"/>
+      <limit effort="1.5" lower="-3.0229511" upper="3.0123429" velocity="2.208932"/>
     </joint>
     
     <link name="katana_motor1_pan_link">
@@ -95,7 +95,7 @@
 	<child link="katana_motor2_lift_link" />
 	<origin xyz="0 0 0" rpy="${M_PI/2} 0 0"/>
 	<axis xyz="0 0 1"/>
-	<limit effort="0.6" lower="-0.135228" upper="2.168572"  velocity="1.190799"/>  
+	<limit effort="0.6" lower="-2.6012933" upper="2.1639407"  velocity="1.190799"/>  
       </joint>
       
       <link name="katana_motor2_lift_link">
@@ -139,7 +139,7 @@
 	  <origin xyz="${link2_length} 0 0" rpy="0 0 0"/>
 	  <axis xyz="0 0 1"/>
 	  <!-- unexplicably, the measured velocity limit of this motor is exactly half of what vel_enc2rad(180) says -->
-	  <limit effort="0.25" lower="-2.220084" upper="2.054223"  velocity="1.190799"/>  
+	  <limit effort="0.25" lower="-2.1833017" upper="2.149487"  velocity="1.190799"/>  
 	</joint>
 	
 	<link name="katana_motor3_lift_link">
@@ -200,7 +200,7 @@
 	    <child  link="katana_motor4_lift_link" />
 	    <origin rpy="${M_PI} 0 0" xyz="${link3_length} 0 0"/>
 	    <axis xyz="0 0 1"/>
-	    <limit effort="0.1" lower="-2.033309" upper="1.876133"  velocity="2.208932"/>  
+	    <limit effort="0.1" lower="-2.030977" upper="1.9919797"  velocity="2.208932"/>  
 	  </joint>
 	  
 	  <link name="katana_motor4_lift_link">
@@ -262,7 +262,7 @@
 	      <child  link="katana_motor5_wrist_roll_link" />
 	      <origin rpy="${M_PI/2} 0 ${-M_PI/2}" xyz="${link4_length} 0 0"/>
 	      <axis xyz="0 0 1"/>
-	      <limit effort="0.01" lower="-2.99270" upper="3.0166"  velocity="2.208932"/>  
+	      <limit effort="0.01" lower="-2.29926262" upper="3.016518"  velocity="2.208932"/>  
 	    </joint>
 	    
 	    <link name="katana_motor5_wrist_roll_link">
