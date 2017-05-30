@@ -262,7 +262,7 @@
 	      <child  link="katana_motor5_wrist_roll_link" />
 	      <origin rpy="${M_PI/2} 0 ${-M_PI/2}" xyz="${link4_length} 0 0"/>
 	      <axis xyz="0 0 1"/>
-	      <limit effort="0.01" lower="-2.29926262" upper="3.016518"  velocity="2.208932"/>  
+	      <limit effort="0.01" lower="-2.9926262" upper="3.016518"  velocity="2.208932"/>  
 	    </joint>
 	    
 	    <link name="katana_motor5_wrist_roll_link">
