@@ -1,0 +1,1 @@
+rosrun moveit_kinematics create_ikfast_moveit_plugin.py tobi_2of4 left_arm tobi_2of4_ikfast_left_arm_plugin /home/johannes/robocup/catkin_ws/src/tobi_2of4_ikfast_left_arm_plugin/src/tobi_2of4_left_arm_ikfast_solver.cpp
