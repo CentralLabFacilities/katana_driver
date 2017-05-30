@@ -437,7 +437,7 @@
 		    
 		    <!-- The fake geometry here is only present to work around https://github.com/ros-planning/moveit_core/issues/158 -->
 		    <visual>
-		      <origin rpy="0 0 0" xyz="0 0 -${tool_frame_offset}"/>
+		      <origin rpy="0 0 0" xyz="0 0 -0.075"/>
 		      <geometry>
 			<box size="0.01 0.01 0.01"/>
 		      </geometry>
