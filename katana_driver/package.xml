@@ -18,6 +18,7 @@
   <run_depend>katana_teleop</run_depend>
   <run_depend>katana_tutorials</run_depend>
   <run_depend>kni</run_depend>
+  <run_depend>tobi_2of4_ikfast_left_arm_plugin</run_depend>
 
   <buildtool_depend>catkin</buildtool_depend>
   <export>
