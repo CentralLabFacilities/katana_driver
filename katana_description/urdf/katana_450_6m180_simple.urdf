@@ -177,7 +177,7 @@
   <!-- lower + upper joint limits have been calculated using the KNI's GetEncoderMinPos(), GetEncoderMaxPos();
   the velocity limit has been calculated by vel_enc2rad(180); 180 encoders / 10ms is the maximum
   speed limit for all joints, according to the Katana 4D documentation -->
-  <!-- the effort limits have been measured experimentally from the maximum effort the Gazebo controller 
+  <!-- the effort limits have been measured experimentally from the maximum effort the Gazebo controller
   uses in normal conditions -->
   <link name="katana_base_link">
     <visual>
@@ -207,7 +207,7 @@
     <child link="katana_motor1_pan_link"/>
     <origin rpy="0 0 0" xyz="0 0 0.2015"/>
     <axis xyz="0 0 1"/>
-    <limit effort="1.5" lower="-3.0229511" upper="3.0123429" velocity="2.208932"/>
+    <limit effort="1.5" lower="-3.0229511" upper="3.0123429" velocity="1.190799"/>
   </joint>
   <link name="katana_motor1_pan_link">
     <visual>
@@ -241,7 +241,7 @@
     <child link="katana_motor2_lift_link"/>
     <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="0.6" lower="-2.6012933" upper="2.1639407" velocity="1.190799"/>
+    <limit effort="0.6" lower="-2.6012933" upper="2.1639407" velocity="1.0"/>
   </joint>
   <link name="katana_motor2_lift_link">
     <visual>
@@ -392,7 +392,7 @@
     <child link="katana_motor5_wrist_roll_link"/>
     <origin rpy="1.57079632679 0 -1.57079632679" xyz="0.1473 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="0.01" lower="-2.29926262" upper="3.016518" velocity="2.208932"/>
+    <limit effort="0.01" lower="-2.9926262" upper="3.016518" velocity="2.208932"/>
   </joint>
   <link name="katana_motor5_wrist_roll_link">
     <visual>
@@ -537,21 +537,21 @@
   <joint name="katana_gripper_tool_frame_joint" type="fixed">
     <parent link="katana_motor5_wrist_roll_link"/>
     <child link="katana_gripper_tool_frame"/>
-    <origin rpy="0 1.57079632679 0" xyz="0 0 -0.11"/>
+    <origin rpy="0 1.57079632679 0" xyz="0 0 -0.075"/>
   </joint>
   <link name="katana_gripper_tool_frame">
     <!-- This is the coordinate system of the end effector (this is the position
 		    used in IK); there is no actual arm part attached to this link -->
     <!-- The fake geometry here is only present to work around https://github.com/ros-planning/moveit_core/issues/158 -->
     <visual>
-      <origin rpy="0 0 0" xyz="-0.11 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.075 0 0"/>
       <geometry>
         <box size="0.01 0.01 0.01"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.11 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.075 0 0"/>
       <geometry>
         <box size="0.01 0.01 0.01"/>
       </geometry>
@@ -566,21 +566,21 @@
   <joint name="katana_gripper_tool_agni_frame_joint" type="fixed">
     <parent link="katana_motor5_wrist_roll_link"/>
     <child link="katana_gripper_tool_agni_frame"/>
-    <origin rpy="0 3.14159265359 0" xyz="0 0 -0.11"/>
+    <origin rpy="0 3.14159265359 0" xyz="0 0 -0.075"/>
   </joint>
   <link name="katana_gripper_tool_agni_frame">
     <!-- This is the coordinate system of the end effector (this is the position
 		    used in IK); there is no actual arm part attached to this link -->
     <!-- The fake geometry here is only present to work around https://github.com/ros-planning/moveit_core/issues/158 -->
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.11"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.075"/>
       <geometry>
         <box size="0.01 0.01 0.01"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 -0.11"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.075"/>
       <geometry>
         <box size="0.01 0.01 0.01"/>
       </geometry>
