@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(tobi_2of4_ikfast_left_arm_plugin)
 
+add_compile_options(-std=c++11)
+
 find_package(catkin REQUIRED COMPONENTS
   moveit_core
   pluginlib
@@ -26,7 +28,6 @@ set(IKFAST_LIBRARY_NAME tobi_2of4_left_arm_moveit_ikfast_plugin)
 find_package(LAPACK REQUIRED)
 
 add_library(${IKFAST_LIBRARY_NAME} src/tobi_2of4_left_arm_ikfast_moveit_plugin.cpp)
-add_definitions(-std=gnu++0x)
 target_link_libraries(${IKFAST_LIBRARY_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LAPACK_LIBRARIES})
 
 install(TARGETS ${IKFAST_LIBRARY_NAME} LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
